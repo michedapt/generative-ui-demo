@@ -4,7 +4,6 @@ import { useChat } from '@ai-sdk/react';
 import { Weather } from '@/components/Weather';
 import { ThemeChanger } from '@/components/ThemeChanger';
 import { useRef } from 'react';
-import { Countdown } from '@/components/Countdown';
 import { Confetti } from '@/components/Confetti';
 
 /**
@@ -127,7 +126,7 @@ export default function ChatComponent() {
                             </div>
                           </div>
                         );
-                        
+
                       case 'result':
                         return (
                           <div key={callId} className="mt-2 text-muted-foreground italic">

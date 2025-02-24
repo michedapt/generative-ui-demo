@@ -1,5 +1,4 @@
 import ChatComponent from '@/components/ChatComponent';
-import { ThemeChanger } from '@/components/ThemeChanger';
 
 export default function Page() {
   return (

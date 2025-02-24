@@ -1,3 +1,7 @@
+'use client';
+
+import Image from 'next/image';
+
 type WeatherProps = {
   location: string;
   country: string;
@@ -28,7 +32,7 @@ export const Weather = ({
     <div className="rounded-lg bg-card border border-border p-4 my-4">
       <h2 className="text-lg font-semibold mb-2 text-foreground">Current Weather for {location}, {country}</h2>
       <div className="flex items-center gap-4">
-        <img src={icon} alt={weather} className="w-16 h-16" />
+        <Image src={icon} alt={weather} className="w-16 h-16" />
         <div>
           <div className="text-3xl text-foreground">{temperature}°C</div>
           <div className="text-muted-foreground">Feels like {feels_like}°C</div>
