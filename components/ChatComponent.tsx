@@ -75,6 +75,13 @@ export default function ChatComponent() {
                       case 'call':
                         return <div key={callId} className="text-muted-foreground italic mt-2">Loading weather...</div>;
                       case 'result':
+                        if (part.toolInvocation.result.error) {
+                          return (
+                            <div key={callId}>
+                              <Weather error={part.toolInvocation.result.error} />
+                            </div>
+                          );
+                        }
                         return (
                           <div key={callId}>
                             <Weather {...part.toolInvocation.result} />

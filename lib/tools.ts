@@ -5,10 +5,13 @@ import { getWeather } from '@/actions/weather';
 export const weatherTool = createTool({
   description: 'Get current weather information for a city',
   parameters: z.object({
-    city: z.string().describe('The city to get weather for'),
+    city: z.string().describe('The city name (e.g., "London" or "Bogota")'),
+    country: z.string().optional().describe('The country code (e.g., "UK" or "CO")'),
   }),
-  execute: async function ({ city }) {
-    return await getWeather(city);
+  execute: async function ({ city, country }) {
+    const query = country ? `${city},${country}` : city;
+    console.log('Weather query:', query);
+    return await getWeather(query);
   },
 });
 

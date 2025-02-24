@@ -1,13 +1,14 @@
 const API_KEY = process.env.OPENWEATHER_API_KEY;
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
-export async function getWeather(city: string) {
+export async function getWeather(city: string, country?: string) {
   try {
-    console.log('Fetching weather for:', city);
+    const query = country ? `${city},${country}` : city;
+    console.log('Fetching weather for:', query);
     console.log('Using API key:', API_KEY?.slice(0, 4) + '...');
     
     const response = await fetch(
-      `${BASE_URL}/weather?q=${city}&APPID=${API_KEY}&units=metric`
+      `${BASE_URL}/weather?q=${query}&APPID=${API_KEY}&units=metric`
     );
     
     if (!response.ok) {
@@ -17,7 +18,18 @@ export async function getWeather(city: string) {
         statusText: response.statusText,
         error: errorData
       });
-      throw new Error(`Weather data fetch failed: ${response.statusText}`);
+      
+      if (response.status === 404) {
+        return {
+          error: country 
+            ? `Could not find weather data for "${city}, ${country}". Please check the city and country names.`
+            : `Could not find weather data for "${city}". Try adding a country code (e.g., "US" or "UK").`
+        };
+      }
+      
+      return {
+        error: `Weather data fetch failed: ${errorData.message || response.statusText}`
+      };
     }
 
     const data = await response.json();
@@ -42,6 +54,8 @@ export async function getWeather(city: string) {
     };
   } catch (error) {
     console.error('Error in getWeather:', error);
-    throw error;
+    return {
+      error: 'An unexpected error occurred while fetching weather data.'
+    };
   }
 }
