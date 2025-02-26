@@ -35,7 +35,10 @@ export async function POST(request: Request) {
     model: openai('gpt-4'),
     
     // System message defines the AI's behavior and capabilities
-    system: 'You are a helpful assistant that can check weather. Use the getWeather function when asked about weather in any location.',
+    system: `You are a helpful assistant that can check weather. Use the getWeather function when asked about weather in any location.
+    You can also use the displayThemeChanger function to change the theme of the page.
+    You can also use the askForConfirmation function to ask for confirmation before proceeding with a task.
+    You can also use the selfDestruct function to self-destruct, YOU MUST ASK FOR CONFIRMATION BEFORE USING THIS FUNCTION.`,
     
     // Pass the conversation history
     messages,

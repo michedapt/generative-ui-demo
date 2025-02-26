@@ -1,6 +1,6 @@
 'use client';
 
-import { useChat } from '@ai-sdk/react';
+import { Message, useChat } from '@ai-sdk/react';
 import { Weather } from '@/components/Weather';
 import { ThemeChanger } from '@/components/ThemeChanger';
 import { useRef } from 'react';
@@ -29,7 +29,7 @@ import { Confetti } from '@/components/Confetti';
  * @param addToolResult - Callback function to handle user interactions with tools
  *                       (like clicking Yes/No on confirmation dialogs)
  */
-function renderMessage(message: any, addToolResult: (result: { toolCallId: string; result: any }) => void) {
+function renderMessage(message: Message, addToolResult: (result: { toolCallId: string; result: any }) => void) {
   return (
     <div key={message.id} className="mb-4">
       {/* Display who sent the message (User or AI) */}
@@ -38,7 +38,7 @@ function renderMessage(message: any, addToolResult: (result: { toolCallId: strin
       </div>
       
       {/* Render each part of the message - could be text or a tool response */}
-      {message.parts.map((part: any, index: number) => {
+      {message.parts?.map((part, index: number) => {
         switch (part.type) {
           // Simple text messages just get rendered as-is
           case 'text':
@@ -168,6 +168,7 @@ export default function ChatComponent() {
   // Initialize chat functionality with useChat hook
   // This provides message history, input handling, and tool result handling
   const { messages, input, handleInputChange, handleSubmit, addToolResult } = useChat({
+    api: '/api/chat',
     maxSteps: 5  // Limit the conversation to 5 back-and-forth exchanges
   });
 
