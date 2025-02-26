@@ -78,7 +78,7 @@ function renderMessage(message: Message, addToolResult: (result: { toolCallId: s
               case 'displayWeather': {
                 switch (part.toolInvocation.state) {
                   case 'call':
-                    return <div key={callId} className="text-muted-foreground italic mt-2">Loading weather...</div>;
+                    return <div key={callId} className="text-muted-foreground italic mt-2">Loading displayWeather --getWeather()...</div>;
                   case 'result':
                     if (part.toolInvocation.result.error) {
                       return (
@@ -100,7 +100,7 @@ function renderMessage(message: Message, addToolResult: (result: { toolCallId: s
               case 'displayThemeChanger': {
                 switch (part.toolInvocation.state) {
                   case 'call':
-                    return <div key={callId} className="text-muted-foreground italic mt-2">Loading theme options...</div>;
+                    return <div key={callId} className="text-muted-foreground italic mt-2">Loading displayThemeChanger...</div>;
                   case 'result':
                     return (
                       <div key={callId}>
