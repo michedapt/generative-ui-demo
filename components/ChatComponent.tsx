@@ -3,7 +3,7 @@
 import { Message, useChat } from '@ai-sdk/react';
 import { Weather } from '@/components/Weather';
 import { ThemeChanger } from '@/components/ThemeChanger';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { Confetti } from '@/components/Confetti';
 
 /**
@@ -174,6 +174,11 @@ export default function ChatComponent() {
 
   // Reference to scroll to the bottom of chat when new messages arrive
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom when messages change
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   return (
     <div className="flex flex-col w-full max-w-xl mx-auto py-24">
