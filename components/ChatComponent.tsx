@@ -169,7 +169,6 @@ export default function ChatComponent() {
   // This provides message history, input handling, and tool result handling
   const { messages, input, handleInputChange, handleSubmit, addToolResult } = useChat({
     api: '/api/chat',
-    maxSteps: 5  // Limit the conversation to 5 back-and-forth exchanges
   });
 
   // Reference to scroll to the bottom of chat when new messages arrive
